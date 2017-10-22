@@ -2,6 +2,7 @@ package com.example.carweather;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,8 +29,6 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 /**
  * Created by 芦荟 on 2017/10/21.
@@ -100,6 +99,12 @@ public class ChooseAreaFragment extends Fragment {
                }else if (currentLevel==LEVEL_CITY){
                    selectedCity=cityList.get(position);
                    queryCounties();
+               }else if (currentLevel==LEVEL_COUNTY){
+                   String weatherId=countyList.get(position).getWeatherId();
+                   Intent intent=new Intent(getActivity(),WeatherActivity.class);
+                   intent.putExtra("weather_id",weatherId);
+                   startActivity(intent);
+                   getActivity().finish();
                }
            }
        });
